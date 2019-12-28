@@ -1,5 +1,9 @@
 const accessToken = "YOUR_TOKEN_KEY"
 
+window.onload = function () {
+    document.getElementById("input").focus();
+}
+
 $(document).ready(() => {
     $("#creat").click(() => {
         let urlRes = $("#input").val();
