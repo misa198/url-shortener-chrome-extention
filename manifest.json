@@ -1,0 +1,10 @@
+{
+    "name": "URL Shortener",
+    "description": "URL Shortener using bit.ly by Thành Vũ",
+    "version": "1.0",
+    "browser_action": {
+      "default_icon": "./icons/icon.png",
+      "default_popup": "index.html"
+    },
+    "manifest_version": 2
+  }

@@ -1,0 +1,38 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 500px;
+    min-height: 200px;
+}
+
+.container {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    padding: 20px 0px 10px 0px;
+}
+
+#input-result {
+    background-color: white!important;
+}
+
+#input-result:focus {
+    outline: none;
+    border: #ced4da 1px solid;
+}
+
+.result button {
+    border: 1px solid #ced4da;
+}
+
+.result button:hover {
+    background-color: #e9ecef;
+}
