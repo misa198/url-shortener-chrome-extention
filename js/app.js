@@ -1,58 +1,34 @@
-const accessToken = "YOUR_TOKEN_KEY"
+const baseURL = 'https://www.misalink.tk';
 
 window.onload = function () {
-    document.getElementById("input").focus();
+    document.getElementById("url").focus();
 }
 
 const sendReq = () => {
     $("#input-result").val("Creating...");
-    let urlRes = $("#input").val();
-    var params = {
-        "long_url": urlRes
-    };
+    const url = $('#url').val();
+    const password = $('#password').val();
+    const body = {};
+    if (password !== '') body.password = password;
+    body.link = url;
 
-    $.ajax({
-        url: "https://api-ssl.bitly.com/v4/shorten",
-        cache: false,
-        dataType: "json",
-        method: "POST",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-        },
-        data: JSON.stringify(params)
-    })
-        .done(function (data) {
-            $("#input-result").val(data.link);
-        })
-        .fail(function (err) {
-            $("#input-result").val("Your URL is not valid");
-        });
+    axios.post(`${baseURL}/document/encode`, body)
+    .then(res => {
+        if (res.data.message) $('#result').val('URL is invalid');
+        if (res.data.code) $('#result').val(`${baseURL}/${res.data.code}`);
+    });
 }
 
 $(document).ready(() => {
-    $("#creat").click(() => {
+    $('#form').on('submit', (e) => {
+        e.preventDefault();
         sendReq();
-    });
-    
-    $('#input').keypress((event) => {
-        if (event.keyCode == 13) {
-            sendReq();
-        }
     });
 });
 
-$("#copy").click(() => {
-    var copyText = document.getElementById("input-result");
+$("#copy-button").click(() => {
+    var copyText = document.getElementById("result");
     copyText.select();
     copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
-    $("#copy-img").replaceWith(
-        '<img id="copy-img" src="./icons/tick.png" alt="copy">'
-    );
-    setTimeout(() => {
-        $("#copy-img").replaceWith(
-            '<img id="copy-img" src="./icons/copy.png" alt="copy">'
-        );
-    }, 1500)
 });
